@@ -1,0 +1,28 @@
+{
+  "name": "my-bandwidth-hero",
+  "version": "1.0.0",
+  "description": "Esse é o meu compressor de imagens que usarei no Tachiyomi",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashu11-A/my-bandwidth-hero.git"
+  },
+  "keywords": [
+    "compressor",
+    "imagens",
+    "tachiyomi"
+  ],
+  "author": "Ashu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ashu11-A/my-bandwidth-hero/issues"
+  },
+  "homepage": "https://github.com/Ashu11-A/my-bandwidth-hero#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sharp": "^0.32.4"
+  }
+}
