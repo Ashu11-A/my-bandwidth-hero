@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/Ashu11-A/my-bandwidth-hero#readme",
   "dependencies": {
+    "basic-auth": "^2.0.1",
     "express": "^4.18.2",
+    "lodash": "^4.17.21",
     "sharp": "^0.32.4"
   }
 }
