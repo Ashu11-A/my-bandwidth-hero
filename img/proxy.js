@@ -37,7 +37,6 @@ async function proxy(req, res) {
       await bypass(req, res, buffer);
     }
   } catch (err) {
-    console.log(err)
     console.error(`Status: ${err?.response?.status ?? 'Error'} (${err?.response?.statusText ?? 'Error'}) host: ${err?.request?.host ?? 'Error'}`);
     return redirect(req, res);
   }
