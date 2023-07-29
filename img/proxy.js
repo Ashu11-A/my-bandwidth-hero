@@ -7,7 +7,7 @@ const { bypass } = require('./bypass')
 const { copyHeaders } = require('./copyHeaders')
 const https = require('https')
 
-async function proxy(req, res) {
+async function proxy (req, res) {
   try {
     const response = await axios.get(req.params.url, {
       headers: {
@@ -21,26 +21,25 @@ async function proxy(req, res) {
       responseType: 'arraybuffer', // Add this to get the response as a buffer
       httpsAgent: new https.Agent({ rejectUnauthorized: false }), // Add this line to disable SSL verification
       jar: true
-    });
+    })
 
-    const origin = response.data;
-    const buffer = Buffer.from(origin);
+    const origin = response.data
+    const buffer = Buffer.from(origin)
 
-    copyHeaders(response, res);
-    res.setHeader('content-encoding', 'identity');
-    req.params.originType = response.headers['content-type'] || '';
-    req.params.originSize = buffer.length;
+    copyHeaders(response, res)
+    res.setHeader('content-encoding', 'identity')
+    req.params.originType = response.headers['content-type'] || ''
+    req.params.originSize = buffer.length
 
     if (shouldCompress(req)) {
-      await compress(req, res, buffer);
+      await compress(req, res, buffer)
     } else {
-      await bypass(req, res, buffer);
+      await bypass(req, res, buffer)
     }
   } catch (err) {
-    console.error(`Status: ${err?.response?.status ?? 'Error'} (${err?.response?.statusText ?? 'Error'}) host: ${err?.request?.host ?? 'Error'}`);
-    return redirect(req, res);
+    console.error(`Status: ${err?.response?.status ?? 'Error'} (${err?.response?.statusText ?? 'Error'}) host: ${err?.request?.host ?? 'Error'}`)
+    return redirect(req, res)
   }
 }
 
-module.exports = { proxy };
-
+module.exports = { proxy }

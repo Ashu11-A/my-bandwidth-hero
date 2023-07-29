@@ -1,12 +1,12 @@
-function copyHeaders(origin, destination) {
+function copyHeaders (origin, destination) {
   if (!origin.headers || typeof origin.headers !== 'object') {
-    console.error('Invalid or missing headers in the origin.');
-    return;
+    console.error('Invalid or missing headers in the origin.')
+    return
   }
 
   for (const [key, value] of Object.entries(origin.headers)) {
-    destination.setHeader(key, value);
+    destination.setHeader(key, value)
   }
 }
 
-module.exports = { copyHeaders };
+module.exports = { copyHeaders }
