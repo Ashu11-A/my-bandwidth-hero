@@ -32,14 +32,13 @@ async function proxy(req, res) {
     req.params.originSize = buffer.length;
 
     if (shouldCompress(req)) {
-      compress(req, res, buffer);
+      await compress(req, res, buffer);
     } else {
-      bypass(req, res, buffer);
+      await bypass(req, res, buffer);
     }
-    // Liberar a memória ocupada pelo buffer
-    Buffer.allocUnsafe(0); // Substitui o buffer original por um buffer vazio
   } catch (err) {
-    console.error(`Status: ${err.response.status} (${err.response.statusText}) host: ${err.request.host}`);
+    console.log(err)
+    console.error(`Status: ${err?.response?.status ?? 'Error'} (${err?.response?.statusText ?? 'Error'}) host: ${err?.request?.host ?? 'Error'}`);
     return redirect(req, res);
   }
 }

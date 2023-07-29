@@ -2,7 +2,7 @@ const sharp = require('sharp')
 const { redirect } = require('./redirect')
 const SimplDB = require('simpl.db')
 
-function compress(req, res, input) {
+async function compress(req, res, input) {
     const db = new SimplDB({
         dataFile: './status.json'
     })
@@ -15,9 +15,9 @@ function compress(req, res, input) {
             progressive: true,
             optimizeScans: true,
         })
-        .toBuffer((err, output, info) => {
+        .toBuffer(async (err, output, info) => {
             if (err || !info || res.headersSent) {
-                console.error(`Status: ${err.response.status} (${err.response.statusText}) host: ${err.request.host}`)
+                console.error(`Status: ${err?.response?.status ?? 'Error'} (${err?.response?.statusText ?? "Error"}) host: ${err?.request?.host ?? "Error"}`)
                 return redirect(req, res)
             }
 
@@ -36,7 +36,7 @@ function compress(req, res, input) {
                 res.setHeader('content-length', originalSize)
                 res.setHeader('x-original-size', originalSize)
                 res.status(200)
-                res.write(input)
+                await res.write(input)
                 res.end()
             } else {
                 db.add('imagesProcessed', 1)
@@ -50,9 +50,12 @@ function compress(req, res, input) {
                 res.setHeader('x-original-size', originalSize)
                 res.setHeader('x-bytes-saved', originalSize - compressedSize)
                 res.status(200)
-                res.write(output)
+                await res.write(output)
                 res.end()
             }
+            // Liberar a memória ocupada pelo buffer
+            input = null
+            output = null
         });
 }
 
