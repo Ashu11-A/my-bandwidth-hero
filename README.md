@@ -31,7 +31,6 @@ O bandwidth-hero-proxy tem um probleminha de uso de Ram, ele cresce exponencialm
 - A forma como o Buffer é tratado mudou, agora menos lixo fica na memoria (Não testado em larga escala).
 - Mudança de pasta, agora a compreensão das imagens fica na pasta img, futuramente será implementado a compreensão de vídeo.
 - Implementação de um Database, para permitir à mostragem de informações uteis, como o dataSaved.
-- Novos argumentos do sharp foram colocados na compreensão das imagens (ainda será mudado).
 - O código foi lintado, e reorganizado para a forma que eu acho a mais correta.
 - Nova verificação foi imposta no copyHeaders para impedir possíveis problemas.
 - As vezes a compreensão gera imagens maiores que as originais, então porque não enviar as imagens originais se isso acontecer? kkkkkkk.
