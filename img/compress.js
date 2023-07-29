@@ -15,11 +15,6 @@ function compress(req, res, input) {
             progressive: true,
             optimizeScans: true,
             mozjpeg: true,
-            chromaSubsampling: true,
-            overshootDeringing: true,
-            optimiseScans: true,
-            optimiseCoding: true,
-            optimizeCoding: 8,
         })
         .toBuffer((err, output, info) => {
             if (err || !info || res.headersSent) {
