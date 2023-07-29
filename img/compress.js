@@ -5,7 +5,7 @@ const SimplDB = require('simpl.db')
 function compress(req, res, input) {
     const db = new SimplDB({
         dataFile: './status.json'
-      })
+    })
     const format = req.params.webp ? 'webp' : 'jpeg'
 
     sharp(input)
@@ -17,26 +17,43 @@ function compress(req, res, input) {
         })
         .toBuffer((err, output, info) => {
             if (err || !info || res.headersSent) {
-                console.log(err || !info || res.headersSent)
+                console.error(`Status: ${err.response.status} (${err.response.statusText}) host: ${err.request.host}`)
                 return redirect(req, res)
             }
-            db.add('imagesProcessed', 1)
-            db.add('Entrada', req.params.originSize)
-            db.add('Saida', info.size)
-            db.add('dataSaved', (req.params.originSize - info.size))
-            console.log(info)
+
+            const originalSize = req.params.originSize
+            const compressedSize = info.size
+
             console.log(
-                'Origem: ', req.params.originSize,
-                '\nbytes-saved: ', (req.params.originSize - info.size)
-            )
-            res.setHeader('content-type', `image/${format}`)
-            res.setHeader('content-length', info.size)
-            res.setHeader('x-original-size', req.params.originSize)
-            res.setHeader('x-bytes-saved', req.params.originSize - info.size)
-            res.status(200)
-            res.write(output)
-            res.end()
-        })
+                'Original: ', originalSize,
+                '\nCompress: ', (compressedSize)
+            );
+
+            if (compressedSize >= originalSize) {
+                console.log('Compression resulted in a larger file size. Returning the original image.')
+                db.add('imagesProcessed', 1)
+                res.setHeader('content-type', `image/${format}`)
+                res.setHeader('content-length', originalSize)
+                res.setHeader('x-original-size', originalSize)
+                res.status(200)
+                res.write(input)
+                res.end()
+            } else {
+                db.add('imagesProcessed', 1)
+                db.add('Entrada', originalSize)
+                db.add('Saida', compressedSize)
+                db.add('dataSaved', (originalSize - compressedSize))
+
+                console.log(info);
+                res.setHeader('content-type', `image/${format}`)
+                res.setHeader('content-length', compressedSize)
+                res.setHeader('x-original-size', originalSize)
+                res.setHeader('x-bytes-saved', originalSize - compressedSize)
+                res.status(200)
+                res.write(output)
+                res.end()
+            }
+        });
 }
 
 module.exports = { compress }

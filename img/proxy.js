@@ -39,7 +39,7 @@ async function proxy(req, res) {
     // Liberar a memória ocupada pelo buffer
     Buffer.allocUnsafe(0); // Substitui o buffer original por um buffer vazio
   } catch (err) {
-    console.error(err);
+    console.error(`Status: ${err.response.status} (${err.response.statusText}) host: ${err.request.host}`);
     return redirect(req, res);
   }
 }
