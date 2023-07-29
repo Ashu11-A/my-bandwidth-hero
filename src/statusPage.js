@@ -24,8 +24,13 @@ function statusPage(req, res) {
         entrada: formatBytes(db.get('Entrada')),
         saida: formatBytes(db.get('Saida')),
         saveData: formatBytes(db.get('dataSaved')),
-        usedMemory: formatBytes(process.memoryUsage().heapUsed),
-        totalMemory: formatBytes(process.memoryUsage().heapTotal)
+        memory: {
+            rss: formatBytes(process.memoryUsage().rss),
+            heapTotal: formatBytes(process.memoryUsage().heapTotal),
+            heapUsed: formatBytes(process.memoryUsage().heapUsed),
+            external: formatBytes(process.memoryUsage().external),
+            arrayBuffers: formatBytes(process.memoryUsage().arrayBuffers),
+        }
     })
 }
 
