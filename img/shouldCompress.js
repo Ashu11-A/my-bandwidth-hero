@@ -1,4 +1,5 @@
-const MIN_COMPRESS_LENGTH = 1024
+const config = require('../config.json')
+const MIN_COMPRESS_LENGTH = config.minCompressLength // Isso representa o tamanho mínimo em bytes para que uma resposta seja comprimida, a menos que seja um formato de imagem específico.
 const MIN_TRANSPARENT_COMPRESS_LENGTH = MIN_COMPRESS_LENGTH * 100
 
 function shouldCompress(req) {

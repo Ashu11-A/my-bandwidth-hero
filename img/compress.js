@@ -1,9 +1,11 @@
 const sharp = require('sharp')
 const { redirect } = require('./redirect')
+const SimplDB = require('simpl.db')
 
 function compress(req, res, input) {
-    const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress
-    console.log(`Alguem acessou a URL da API! IP: ${ipAddress}`)
+    const db = new SimplDB({
+        dataFile: './status.json'
+      })
     const format = req.params.webp ? 'webp' : 'jpeg'
 
     sharp(input)
@@ -24,7 +26,15 @@ function compress(req, res, input) {
                 console.log(err || !info || res.headersSent)
                 return redirect(req, res)
             }
-            console.log(req.params.originSize, (req.params.originSize - info.size))
+            db.add('imagesProcessed', 1)
+            db.add('Entrada', req.params.originSize)
+            db.add('Saida', info.size)
+            db.add('dataSaved', (req.params.originSize - info.size))
+            console.log(info)
+            console.log(
+                'Origem: ', req.params.originSize,
+                '\nbytes-saved: ', (req.params.originSize - info.size)
+            )
             res.setHeader('content-type', `image/${format}`)
             res.setHeader('content-length', info.size)
             res.setHeader('x-original-size', req.params.originSize)
