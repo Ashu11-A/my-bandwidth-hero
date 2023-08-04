@@ -20,6 +20,8 @@ function Last24H () {
     const entradaData = db.get('Entrada') || 0
     const saidaData = db.get('Saida') || 0
     const hourlyData = db.get('hourlyData') || []
+    const img = db.get('imagesProcessed') || 0
+    const dataSaved = db.get('dataSaved') || 0
 
     // Verifica se os dados já foram adicionados para a hora atual
     const existingEntryIndex = hourlyData.findIndex(entry => entry.time === `${currentHour}h`)
@@ -35,7 +37,9 @@ function Last24H () {
       hourlyData[existingEntryIndex + 1] = {
         time: `${currentHour}h`,
         type: 'Saida',
-        dados: formatBytes(saidaData)
+        dados: formatBytes(saidaData),
+        imagesProcessed: img,
+        dataSaved: formatBytes(dataSaved)
       }
     } else {
       hourlyData.push({
