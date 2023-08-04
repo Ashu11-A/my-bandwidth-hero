@@ -12,18 +12,21 @@ function formatBytes (bytes, decimals = 2) {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
 }
 
-function statusPage (req, res) {
+function statusPage(req, res) {
   const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress
-  console.log(`Alguem acessou a URL da API! IP: ${ipAddress}`)
+  console.log(`Alguém acessou a URL da API! IP: ${ipAddress}`)
+
   const db = new SimplDB({
-    dataFile: './status.json'
+    dataFile: './status.json',
   })
+
   res.status(200).json({
     status: 200,
     imgProcessed: db.get('imagesProcessed'),
     entrada: formatBytes(db.get('Entrada')),
     saida: formatBytes(db.get('Saida')),
     saveData: formatBytes(db.get('dataSaved')),
+    hourlyData: db.get('hourlyData'),
     memory: {
       rss: formatBytes(process.memoryUsage().rss),
       heapTotal: formatBytes(process.memoryUsage().heapTotal),

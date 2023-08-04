@@ -26,7 +26,7 @@ async function compress (req, res, input) {
 
       console.log(
         'Original: ', originalSize,
-        '\nCompress: ', (compressedSize)
+        '\nCompress: ', compressedSize
       )
 
       if (compressedSize >= originalSize) {
