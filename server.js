@@ -5,7 +5,6 @@ const { params } = require('./img/params')
 const { proxy } = require('./img/proxy')
 const { statusPage } = require('./src/statusPage')
 const { videoCompress } = require('./video/videoCompress')
-const { Last24H } = require('./src/hourlyData')
 
 const Port = config.port || 8080
 
@@ -25,7 +24,3 @@ app.post('/compress-video', videoCompress)
 app.listen(Port, () =>
   console.log(`Estou online em ${Port}`)
 )
-
-setInterval(() => {
-  Last24H()
-}, 5000)

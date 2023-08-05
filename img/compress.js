@@ -1,6 +1,7 @@
 const sharp = require('sharp')
 const { redirect } = require('./redirect')
 const SimplDB = require('simpl.db')
+const { Last24H } = require('../src/hourlyData')
 
 async function compress (req, res, input) {
   const db = new SimplDB({
@@ -32,6 +33,8 @@ async function compress (req, res, input) {
       if (compressedSize >= originalSize) {
         console.log('Compression resulted in a larger file size. Returning the original image.')
         db.add('imagesProcessed', 1)
+        db.add('Entrada', originalSize)
+        db.add('Saida', originalSize)
         res.setHeader('content-type', `image/${format}`)
         res.setHeader('content-length', originalSize)
         res.setHeader('x-original-size', originalSize)
@@ -53,6 +56,7 @@ async function compress (req, res, input) {
         await res.write(output)
         res.end()
       }
+      Last24H()
       // Liberar a memória ocupada pelo buffer
       input = null
       output = null
