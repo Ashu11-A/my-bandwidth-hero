@@ -67,8 +67,8 @@ function Last24H () {
       })
     }
 
-    // Manter apenas as últimas 24 entradas de dados
-    const maxEntries = 24
+    // Manter apenas as últimas 24 * 3 entradas de dados
+    const maxEntries = 72
     while (hourlyData.length > maxEntries) {
       hourlyData.shift()
     }
