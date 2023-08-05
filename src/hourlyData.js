@@ -38,8 +38,13 @@ function Last24H () {
         time: `${currentHour}h`,
         type: 'Saida',
         dados: formatBytes(saidaData),
+      }
+
+      hourlyData[existingEntryIndex + 2] = {
+        time: `${currentHour}h`,
+        type: 'Salvado',
+        dados: formatBytes(dataSaved),
         imagesProcessed: img,
-        dataSaved: formatBytes(dataSaved)
       }
     } else {
       hourlyData.push({
@@ -52,6 +57,13 @@ function Last24H () {
         time: `${currentHour}h`,
         type: 'Saida',
         dados: formatBytes(saidaData)
+      })
+
+      hourlyData.push({
+        time: `${currentHour}h`,
+        type: 'Salvado',
+        dados: formatBytes(dataSaved),
+        imagesProcessed: img,
       })
     }
 
