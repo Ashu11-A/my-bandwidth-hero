@@ -12,12 +12,12 @@ function formatBytes (bytes, decimals = 2) {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
 }
 
-function statusPage(req, res) {
+function statusPage (req, res) {
   const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress
   console.log(`Alguém acessou a URL da API! IP: ${ipAddress}`)
 
   const db = new SimplDB({
-    dataFile: './status.json',
+    dataFile: './status.json'
   })
 
   res.status(200).json({

@@ -1,7 +1,7 @@
 const sharp = require('sharp')
 const { redirect } = require('./redirect')
 const SimplDB = require('simpl.db')
-const { Last24H } = require('../src/hourlyData')
+const { Last24H } = require('@/utils/hourlyData')
 
 async function compress (req, res, input) {
   const db = new SimplDB({
