@@ -25,8 +25,7 @@ async function proxy(req: Request, res: Response) {
       httpsAgent: new https.Agent({ rejectUnauthorized: false }),
     });
 
-    const origin: ArrayBuffer = response.data;
-    const buffer = Buffer.from(origin);
+    const buffer = Buffer.from(response.data);
 
     // Criar um objeto falso do tipo IncomingMessage
     const fakeIncomingMessage: any = {
