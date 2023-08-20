@@ -10,7 +10,7 @@ const router: Router = Router()
 router.get('/images', params, proxy)
 router.get('/img', params, proxy)
 
-router.get('/', statusPage)
+router.get('/api', statusPage)
 
 router.use(express.raw({ type: 'video/*', limit: '100mb' }))
 router.post('/compress-video', videoCompress)

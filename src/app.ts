@@ -1,8 +1,8 @@
-import express from "express";
-import { router } from "router";
+import express, { Application } from "express";
+import { router } from "@/router";
 
 export class App{
-    public server: express.Application
+    public server: Application
 
     constructor(){
         this.server = express()

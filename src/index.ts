@@ -1,8 +1,8 @@
-import { App } from "app"
-import { port } from "./config.json"
+import { App } from 'app'
+import config from '@/config/settings'
 
 new App().server.enable('trust proxy')
 
-new App().server.listen(port, () => {
-    console.log(`Servidor listado em http://localhost:${port}`)
+new App().server.listen(config.port, () => {
+  console.log(`Servidor listado em http://localhost:${config.port}`)
 })
