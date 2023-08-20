@@ -1,4 +1,4 @@
-import config from '../config/settings';
+import config from '@/config/settings';
 
 const MIN_COMPRESS_LENGTH = config.minCompressLength;
 const MIN_TRANSPARENT_COMPRESS_LENGTH = MIN_COMPRESS_LENGTH * 100;

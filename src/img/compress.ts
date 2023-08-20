@@ -9,6 +9,8 @@ async function compress(req: Request, res: Response, input: Buffer): Promise<voi
     dataFile: './status.json'
   })
 
+  db.toJSON()
+
   const format = req.params.webp ? 'webp' : 'jpeg';
 
   console.log('Iniciando compressão...');
@@ -23,8 +25,8 @@ async function compress(req: Request, res: Response, input: Buffer): Promise<voi
       })
       .toBuffer();
 
-    const originalSize = parseInt(req.params.originSize);
-    const compressedSize = output.length;
+    let originalSize: any = parseInt(req.params.originSize);
+    let compressedSize: any = output.length;
 
     console.log(
       'Tamanho original: ', originalSize,
@@ -67,12 +69,15 @@ async function compress(req: Request, res: Response, input: Buffer): Promise<voi
 
     await Last24H();
     // Liberar a memória ocupada pelo buffer com fill
-    input.fill(0);
     output.fill(0);
+    originalSize = null
+    compressedSize = null
   } catch (err:any) {
     console.error(err);
     console.error(`Status: ${err?.response?.status ?? 'Error'} (${err?.response?.statusText ?? 'Error'}) host: ${err?.request?.host ?? 'Error'}`);
     return redirect(req, res);
+  } finally {
+    input.fill(0);
   }
 }
 

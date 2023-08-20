@@ -2,12 +2,10 @@ import { Database } from 'simpl.db';
 
 async function Last24H() {
   try {
-    /**
-      * Removi o simpl.db pq ele é preto
-      */
     const db: any = new Database({
       dataFile: './status.json'
     })
+    db.toJSON()
 
     function formatBytes(bytes: number, decimals = 2): Object {
       if (!bytes) return [0, 'Bytes'];

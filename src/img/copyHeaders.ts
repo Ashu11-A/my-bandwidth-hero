@@ -6,9 +6,8 @@ function copyHeaders(origin: IncomingMessage, destination: ServerResponse): void
     return;
   }
 
-  for (const [key, value] of Object.entries(origin.headers)) {
-    const headerKey: string = key;
-    const headerValue: any = value;
+  const headers: [any, any][] = Object.entries(origin.headers);
+  for (const [headerKey, headerValue] of headers) {
     destination.setHeader(headerKey, headerValue);
   }
 }
