@@ -67,7 +67,7 @@ async function compress(req: Request, res: Response, input: Buffer): Promise<voi
       res.send(output);
     }
 
-    await Last24H();
+    await Last24H(1);
     // Liberar a memória ocupada pelo buffer com fill
     output.fill(0);
     originalSize = null

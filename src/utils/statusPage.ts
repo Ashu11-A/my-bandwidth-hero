@@ -53,7 +53,7 @@ async function statusPage(req: Request, res: Response): Promise<void> {
       memory: {...memory}
     });
   } catch (error) {
-    console.error('Erro ao acessar o QuickDB:', error);
+    console.error('Erro ao acessar o SimplDB:', error);
     res.status(500).json({ status: 500, message: 'Erro interno do servidor' });
   }
 }

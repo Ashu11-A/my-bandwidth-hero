@@ -1,6 +1,6 @@
 import { Database } from 'simpl.db';
 
-async function Last24H() {
+async function Last24H(imgAdd: number) {
   try {
     const db: any = new Database({
       dataFile: './status.json'
@@ -46,7 +46,7 @@ async function Last24H() {
         };
       });
     
-      hourlyData[existingEntryIndex + 3].imagesProcessed += 1;
+      hourlyData[existingEntryIndex + 3].imagesProcessed += imgAdd;
     } else {
       memoryStats.forEach(stat => {
         hourlyData.push({
@@ -59,7 +59,7 @@ async function Last24H() {
       hourlyData.push({
         time: `${currentHour}h`,
         type: 'images_Processed',
-        imagesProcessed: 1
+        imagesProcessed: imgAdd
       });
     }
     
