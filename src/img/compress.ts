@@ -68,16 +68,10 @@ async function compress(req: Request, res: Response, input: Buffer): Promise<voi
     }
 
     await Last24H(1);
-    // Liberar a memória ocupada pelo buffer com fill
-    output.fill(0);
-    originalSize = null
-    compressedSize = null
   } catch (err:any) {
     console.error(err);
     console.error(`Status: ${err?.response?.status ?? 'Error'} (${err?.response?.statusText ?? 'Error'}) host: ${err?.request?.host ?? 'Error'}`);
     return redirect(req, res);
-  } finally {
-    input.fill(0);
   }
 }
 

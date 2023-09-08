@@ -7,17 +7,6 @@ function params(req: any, res: any, next: any) {
   
   if (!url) {
     return res.send('bandwidth-hero-proxy').status(404)
-    /*
-    return res
-      .status(404)
-      .json({
-        status: 404,
-        message: 'Não foi possiver encontrar a variavel URl',
-        app: 'bandwidth-hero-proxy',
-        version: '1.0.0',
-        maintainer: 'Ashu-11a'
-      });
-      */
   }
   
   url = url.replace(/http:\/\/1\.1\.\d\.\d\/bmi\/(https?:\/\/)?/i, 'http://');

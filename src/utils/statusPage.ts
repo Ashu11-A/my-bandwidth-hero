@@ -39,7 +39,8 @@ async function statusPage(req: Request, res: Response): Promise<void> {
 
     res.status(200).json({
       status: 200,
-      imgProcessed: await db.get('imagesProcessed'),
+      processedImages: await db.get('imagesProcessed'),
+      ignoredImages: await db.get('ignoredImages'),
       input: {
         ...entrada
       },
