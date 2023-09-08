@@ -69,8 +69,8 @@ async function compress(req: Request, res: Response, input: Buffer): Promise<voi
 
     await Last24H(1);
   } catch (err:any) {
-    console.error(err);
-    console.error(`Status: ${err?.response?.status ?? 'Error'} (${err?.response?.statusText ?? 'Error'}) host: ${err?.request?.host ?? 'Error'}`);
+    console.log(err);
+    console.log(`Status: ${err?.response?.status ?? 'Error'} (${err?.response?.statusText ?? 'Error'}) host: ${err?.request?.host ?? 'Error'}`);
     return redirect(req, res);
   }
 }

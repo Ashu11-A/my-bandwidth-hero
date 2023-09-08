@@ -72,9 +72,8 @@ async function Last24H(imgAdd: number) {
 
     db.set('hourlyData', hourlyData);
     db.save()
-    console.log('Dados salvos com sucesso:', hourlyData);
   } catch (error) {
-    console.error('Erro ao salvar os dados:', error);
+    console.log('Erro ao salvar os dados:', error);
   }
 }
 

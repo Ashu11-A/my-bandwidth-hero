@@ -38,5 +38,5 @@ if (process.send) { // Verifica se process.send está definido
       .save(`./temp/${name}`);
   });
 } else {
-  console.error('Cannot use process.send outside of a child process context');
+  console.log('Cannot use process.send outside of a child process context');
 }

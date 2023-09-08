@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon",
-    "test": "npx autocannon -c 100 -d 120 -p 10 http://localhost:3002",
+    "test": "ts-node test/index.ts",
     "start": "ts-node src/index.ts",
     "lint": "npx eslint ./src/**/*.ts --fix"
   },

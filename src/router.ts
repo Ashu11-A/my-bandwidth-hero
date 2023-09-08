@@ -15,6 +15,6 @@ router.get('/api', statusPage)
 router.use(express.raw({ type: 'video/*', limit: '100mb' }))
 router.post('/compress-video', videoCompress)
 
-
+router.use('/public', express.static(__dirname + '/public'));
 
 export { router }

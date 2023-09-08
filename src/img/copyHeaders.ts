@@ -2,7 +2,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 
 function copyHeaders(origin: IncomingMessage, destination: ServerResponse): void {
   if (!origin.headers || typeof origin.headers !== 'object') {
-    console.error('Headers inválidos ou ausentes na origem.');
+    console.log('Headers inválidos ou ausentes na origem.');
     return;
   }
 
